@@ -1,0 +1,11 @@
+[project]
+name = "weavz-strands-mcp-example"
+version = "0.1.0"
+description = "Strands Agents connected to Weavz over MCP"
+requires-python = ">=3.11,<3.14"
+dependencies = ["strands-agents==1.65.0", "pytest>=8,<9"]
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+[tool.uv]
+package = false

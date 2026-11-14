@@ -1,0 +1,20 @@
+# Strands Agents + Weavz MCP
+
+Uses Strands' native MCP client with Streamable HTTP and bearer authorization. Configure a custom Weavz MCP server in Tool Mode or Code Mode first. `WEAVZ_MCP_MODE` validates its advertised tools; it cannot change a remote server setting.
+
+Requirements: Python 3.11 or 3.12, uv, and a custom MCP endpoint plus MCP access token. Do not use a Weavz REST API key. The personal `https://platform.weavz.io/mcp/weavz` endpoint uses OAuth.
+
+## Local fixture
+
+```sh
+uv sync --locked
+uv run python main.py --fixture --mode tools
+uv run python main.py --fixture --mode code
+uv run pytest
+```
+
+The fixture is a separate, bearer-protected MCP SDK server on loopback with synthetic data. These checks do not use a model or live Weavz.
+
+## Weavz and optional model
+
+Copy `.env.example` to `.env` and set the endpoint/token from your custom setup. `uv run --env-file .env python main.py --mode tools` or `--mode code` discovers the live server's actual tools. For a live agent run, connect an app containing records for your task, set `WEAVZ_MODEL` to a Bedrock model id supported by your AWS account and configure AWS credentials, then run `uv run --env-file .env python main.py --mode tools --prompt "Find the latest record matching the task you connected"`.

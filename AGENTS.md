@@ -1,0 +1,3 @@
+- Use `strands.tools.mcp.MCPClient` and keep its context open through discovery/call or agent run.
+- Fixture proof is synthetic local adapter evidence only.
+- Never commit `.env` or credentials.
